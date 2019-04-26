@@ -77,10 +77,12 @@ public class BeroepsProductMenuBar extends MenuBar {
             new CursistToevoegenView(mainPane);
         });
         miCursistAanpassen.setOnAction(event->{
-            new CursistAanpassenView();
+            mainPane.getChildren().clear();
+            new CursistAanpassenView(mainPane);
         });
         miCursistVerwijderen.setOnAction(event-> {
-            new CursistVerwijderenView();
+            mainPane.getChildren().clear();
+            new CursistVerwijderenView(mainPane);
         });
         miVrijwilligerToevoegen.setOnAction(event->{
             mainPane.getChildren().clear();
@@ -88,35 +90,35 @@ public class BeroepsProductMenuBar extends MenuBar {
         });
         miVrijwilligerAanpassen.setOnAction(event->{
             mainPane.getChildren().clear();
-            new VrijwilligerAanpassenView();
+            new VrijwilligerAanpassenView(mainPane);
         });
         miVrijwilligerVerwijderen.setOnAction(event->{
             mainPane.getChildren().clear();
-            new VrijwilligerVerwijderenView();
+            new VrijwilligerVerwijderenView(mainPane);
         });
         miBuurthuisToevoegen.setOnAction(event->{
             mainPane.getChildren().clear();
-            new BuurthuisToevoegenView();
+            new BuurthuisToevoegenView(mainPane);
         });
         miBuurthuisAanpassen.setOnAction(event->{
             mainPane.getChildren().clear();
-            new BuurthuisAanpassenView();
+            new BuurthuisAanpassenView(mainPane);
         });
         miBuurthuisVerwijderen.setOnAction(event->{
             mainPane.getChildren().clear();
-            new BuurthuisVerwijderenView();
+            new BuurthuisVerwijderenView(mainPane);
         });
         miLesToevoegen.setOnAction(event->{
             mainPane.getChildren().clear();
-            new LesToevoegenView();
+            new LesToevoegenView(mainPane);
         });
         miLesAanpassen.setOnAction(event->{
             mainPane.getChildren().clear();
-            new LesAanpassenView();
+            new LesAanpassenView(mainPane);
         });
         miLesVerwijderen.setOnAction(event ->{
             mainPane.getChildren().clear();
-            new LesVerwijderenView();
+            new LesVerwijderenView(mainPane);
         });
         
         
@@ -129,29 +131,6 @@ public class BeroepsProductMenuBar extends MenuBar {
         mLes.getItems().addAll(miLesToevoegen,miLesAanpassen,miLesVerwijderen);
             
             
-//	mMap = new Menu("Map");
-//	mActivities = new Menu("Vliegactiviteit");
-//	
-////	mAdd = new Menu("Toevoegen");
-//	
-//	miMap = new MenuItem("Bekijk kaart");
-//	miActivities = new MenuItem("Bekijk activiteit");
-//		
-//	mMap.getItems().add(miMap);
-//	mActivities.getItems().add(miActivities);
-//	
-//	miActivities.setOnAction(event->{
-//		mainPane.getChildren().clear();
-//		
-//	});
-//	
-//	miMap.setOnAction(event->{
-//		mainPane.getChildren().clear();
-//		new MapView(mainPane);
-//	});
-//	
-//	this.getMenus().addAll(mMap,mActivities);
-
         this.getMenus().addAll(mCursist,mVrijwilliger,mBuurthuis,mLes,mOverzicht);
 	}
 	

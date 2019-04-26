@@ -5,6 +5,8 @@
  */
 package beroepsproductblok4.View;
 
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -27,6 +29,8 @@ public class VrijwilligerToevoegenView extends GridPane{
     public TextField txtEmail;
     public TextField txtPhonenr;
     
+    public Button addPerson;
+    
     public VrijwilligerToevoegenView(Pane p) {
     lblFirstName = new Text("Voornaam vrijwilliger: ");
     lblTussenvoegsel = new Text ("Tussenvoegsel vrijwilliger: ");
@@ -40,6 +44,25 @@ public class VrijwilligerToevoegenView extends GridPane{
     txtEmail = new TextField();
     txtPhonenr = new TextField();
     
+    addPerson = new Button("Vrijwilliger toevoegen");
+    
+    this.setPadding(new Insets(10,10,10,10));
+    this.setVgap(10);
+    
+    add(lblFirstName,0,0);
+    add(lblTussenvoegsel,0,1);
+    add(lblSureName,0,2);
+    add(lblEmail,0,3);
+    add(lblPhonenr,0,4);
+    
+    add(txtFirstName,1,0);
+    add(txtTussenvoegsel,1,1);
+    add(txtSureName,1,2);
+    add(txtEmail,1,3);
+    add(txtPhonenr,1,4);
+    add(addPerson,1,5);
+    
+    p.getChildren().addAll(this);
     }
     
 }

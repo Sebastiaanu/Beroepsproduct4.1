@@ -5,6 +5,8 @@
  */
 package beroepsproductblok4.View;
 
+import javafx.scene.layout.Pane;
+
 /**
  *
  * @author jelmu
@@ -12,6 +14,10 @@ package beroepsproductblok4.View;
 public class VrijwilligerAanpassenView {
 
     public VrijwilligerAanpassenView() {
+    }
+
+    public VrijwilligerAanpassenView(Pane mainPane) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
