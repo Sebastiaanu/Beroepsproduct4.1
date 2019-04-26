@@ -31,6 +31,7 @@ public class BeroepsProductMenuBar extends MenuBar {
 	Menu mVrijwilliger;
 	Menu mBuurthuis;
         Menu mLes;
+        Menu mOverzicht;
 	
 	MenuItem miCursistToevoegen;
         MenuItem miCursistAanpassen;
@@ -53,6 +54,7 @@ public class BeroepsProductMenuBar extends MenuBar {
         mVrijwilliger = new Menu("Vrijwilliger");
         mBuurthuis = new Menu("Buurthuis");
         mLes = new Menu("Les");
+        mOverzicht = new Menu("Overzicht");
         
         miCursistToevoegen = new MenuItem("Toevoegen");
         miCursistAanpassen = new MenuItem("Aanpassen");
@@ -81,30 +83,39 @@ public class BeroepsProductMenuBar extends MenuBar {
             new CursistVerwijderenView();
         });
         miVrijwilligerToevoegen.setOnAction(event->{
-            new VrijwilligerToevoegenView();
+            mainPane.getChildren().clear();
+            new VrijwilligerToevoegenView(mainPane);
         });
         miVrijwilligerAanpassen.setOnAction(event->{
+            mainPane.getChildren().clear();
             new VrijwilligerAanpassenView();
         });
         miVrijwilligerVerwijderen.setOnAction(event->{
+            mainPane.getChildren().clear();
             new VrijwilligerVerwijderenView();
         });
         miBuurthuisToevoegen.setOnAction(event->{
+            mainPane.getChildren().clear();
             new BuurthuisToevoegenView();
         });
         miBuurthuisAanpassen.setOnAction(event->{
+            mainPane.getChildren().clear();
             new BuurthuisAanpassenView();
         });
         miBuurthuisVerwijderen.setOnAction(event->{
+            mainPane.getChildren().clear();
             new BuurthuisVerwijderenView();
         });
         miLesToevoegen.setOnAction(event->{
+            mainPane.getChildren().clear();
             new LesToevoegenView();
         });
         miLesAanpassen.setOnAction(event->{
+            mainPane.getChildren().clear();
             new LesAanpassenView();
         });
         miLesVerwijderen.setOnAction(event ->{
+            mainPane.getChildren().clear();
             new LesVerwijderenView();
         });
         
@@ -141,7 +152,7 @@ public class BeroepsProductMenuBar extends MenuBar {
 //	
 //	this.getMenus().addAll(mMap,mActivities);
 
-        this.getMenus().addAll(mCursist,mVrijwilliger,mBuurthuis,mLes);
+        this.getMenus().addAll(mCursist,mVrijwilliger,mBuurthuis,mLes,mOverzicht);
 	}
 	
 	

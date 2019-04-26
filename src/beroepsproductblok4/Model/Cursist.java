@@ -9,7 +9,7 @@ package beroepsproductblok4.Model;
  *
  * @author jelmu
  */
-public class Cursist extends Person{
+public class Cursist extends Persoon{
     int idCursist;
     String countryOfOrigin;
 

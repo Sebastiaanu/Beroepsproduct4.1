@@ -9,7 +9,7 @@ package beroepsproductblok4.Model;
  *
  * @author jelmu
  */
-public class Vrijwilliger extends Person{
+public class Vrijwilliger extends Persoon{
     public String email;
     public String firstName;
     public String tussenvoegsel;
