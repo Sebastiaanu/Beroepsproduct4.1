@@ -5,6 +5,9 @@
  */
 package beroepsproductblok4.View;
 
+import beroepsproductblok4.Connector.DbConnector;
+import beroepsproductblok4.Model.Buurthuis;
+import java.sql.ResultSet;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -49,6 +52,27 @@ public class BuurthuisToevoegenView extends GridPane{
         txtPhonenr = new TextField();
         
         addBuurthuis = new Button("Buurthuis Toevoegen");
+        
+        addBuurthuis.setOnAction(event->{
+            Buurthuis nieuwBuurthuis = new Buurthuis();
+            DbConnector dbConnector = new DbConnector();
+            
+            nieuwBuurthuis.setName(txtName.getText());
+            nieuwBuurthuis.setAdres(txtAdres.getText());
+            nieuwBuurthuis.setPostalCode(txtPostalCode.getText());
+            nieuwBuurthuis.setCity(txtCity.getText());
+            nieuwBuurthuis.setContactPerson(txtContactPerson.getText());
+            nieuwBuurthuis.setPhoneNumber(txtPhonenr.getText());
+            
+            String strSQL = "Insert into Buurthuis";
+            ResultSet result = dbConnector.getData(strSQL);
+            try{
+                
+            }catch(Exception e){
+                
+            }
+            
+        });
         
         this.setPadding(new Insets(10,10,10,10));
         this.setVgap(10);

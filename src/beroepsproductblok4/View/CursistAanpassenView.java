@@ -13,11 +13,8 @@ import javafx.scene.layout.Pane;
  */
 public class CursistAanpassenView {
 
-    public CursistAanpassenView() {
-    }
-
-    public CursistAanpassenView(Pane mainPane) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CursistAanpassenView(Pane p) {
+        
     }
     
 }
