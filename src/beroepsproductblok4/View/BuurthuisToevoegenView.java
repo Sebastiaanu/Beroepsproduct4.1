@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
@@ -20,6 +21,7 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class BuurthuisToevoegenView extends GridPane{
+    public Text lblBuurthuisToevoegen;
     public Text lblName;
     public Text lblAdres;
     public Text lblPostalCode;
@@ -37,12 +39,14 @@ public class BuurthuisToevoegenView extends GridPane{
     public Button addBuurthuis;
     
     public BuurthuisToevoegenView(Pane p) {
-        lblName = new Text("Naam buurthuis toevoegen");
-        lblAdres = new Text("Adres buurthuis toevoegen");
-        lblPostalCode = new Text("Postcode buurthuis toevoegen");
-        lblCity = new Text("Stad/dorp buurthuis toevoegen:");
-        lblContactPerson = new Text("Contactpersoon buurthuis toevoegen:");
-        lblPhonenr = new Text("Telefoonnummer buurthuis toevoegen:");
+        lblBuurthuisToevoegen = new Text("Buurthuis toevoegen");
+        lblBuurthuisToevoegen.setFont(Font.font("Verdana",20));
+        lblName = new Text("Naam buurthuis toevoegen: ");
+        lblAdres = new Text("Adres buurthuis toevoegen: ");
+        lblPostalCode = new Text("Postcode buurthuis toevoegen: ");
+        lblCity = new Text("Stad/dorp buurthuis toevoegen: ");
+        lblContactPerson = new Text("Contactpersoon buurthuis toevoegen: ");
+        lblPhonenr = new Text("Telefoonnummer buurthuis toevoegen: ");
         
         txtName = new TextField();
         txtAdres = new TextField();
@@ -77,21 +81,22 @@ public class BuurthuisToevoegenView extends GridPane{
         this.setPadding(new Insets(10,10,10,10));
         this.setVgap(10);
         
-        add(lblName,0,0);
-        add(lblAdres,0,1);
-        add(lblPostalCode,0,2);
-        add(lblCity,0,3);
-        add(lblContactPerson,0,4);
-        add(lblPhonenr,0,5);
+        add(lblBuurthuisToevoegen,0,0);
+        add(lblName,0,1);
+        add(lblAdres,0,2);
+        add(lblPostalCode,0,3);
+        add(lblCity,0,4);
+        add(lblContactPerson,0,5);
+        add(lblPhonenr,0,6);
         
-       add(txtName,1,0);
-       add(txtAdres,1,1);
-       add(txtPostalCode,1,2);
-       add(txtCity,1,3);
-       add(txtContactPerson,1,4);
-       add(txtPhonenr,1,5);
+       add(txtName,1,1);
+       add(txtAdres,1,2);
+       add(txtPostalCode,1,3);
+       add(txtCity,1,4);
+       add(txtContactPerson,1,5);
+       add(txtPhonenr,1,6);
        
-       add(addBuurthuis,1,6);
+       add(addBuurthuis,1,7);
         
         p.getChildren().addAll(this);
     
