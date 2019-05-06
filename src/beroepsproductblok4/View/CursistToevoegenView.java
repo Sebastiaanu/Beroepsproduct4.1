@@ -74,6 +74,7 @@ public class CursistToevoegenView extends GridPane {
     add(txtCountryOfOrigin,1,6);
     
     add(addPerson,1,7);
+
     
     p.getChildren().addAll(this);
     }
