@@ -40,5 +40,16 @@ public class DbConnector {
         }
         return result;
     }
+    
+    public int executeDML(String strSQL){
+        int result = 0;
+        try{
+            Statement stmt = createConnection().createStatement();
+            result = stmt.executeUpdate(strSQL);
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
 }
 
