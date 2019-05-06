@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
@@ -18,11 +19,14 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class BuurthuisVerwijderenView extends GridPane{
+    public Text lblBuurthuisVerwijderen;
     public Text lblSelectBuurthuis;
     public ComboBox cBSelectBuurthuis;
     public Button selectButton;
     
     public BuurthuisVerwijderenView(Pane p) {
+        lblBuurthuisVerwijderen = new Text("Verwijderen Buurthuis");
+        lblBuurthuisVerwijderen.setFont(Font.font("Verdana",20));
         lblSelectBuurthuis = new Text("Selecteer Buurthuis ");
         cBSelectBuurthuis = new ComboBox();
         selectButton = new Button("Verwijder buurthuis");
@@ -30,9 +34,10 @@ public class BuurthuisVerwijderenView extends GridPane{
         this.setPadding(new Insets(10,10,10,10));
         this.setVgap(10);
         
-        add(lblSelectBuurthuis,0,0);
-        add(cBSelectBuurthuis,0,1);
-        add(selectButton,1,1);
+        add(lblBuurthuisVerwijderen,0,0);
+        add(lblSelectBuurthuis,0,1);
+        add(cBSelectBuurthuis,0,2);
+        add(selectButton,1,2);
         
         p.getChildren().addAll(this);
     }
