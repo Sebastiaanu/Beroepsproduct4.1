@@ -15,6 +15,7 @@ public class Persoon {
     String tussenvoegsel;
     String sureName;
     String phoneNumber;
+    String placeOfLiving;
 
     public String getEmail() {
         return email;
@@ -55,4 +56,13 @@ public class Persoon {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public String getPlaceOfLiving() {
+        return placeOfLiving;
+    }
+
+    public void setPlaceOfLiving(String placeOfLiving) {
+        this.placeOfLiving = placeOfLiving;
+    }
+    
 }

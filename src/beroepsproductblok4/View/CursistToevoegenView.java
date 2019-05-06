@@ -5,6 +5,9 @@
  */
 package beroepsproductblok4.View;
 
+import beroepsproductblok4.Connector.DbConnector;
+import beroepsproductblok4.Model.Cursist;
+import java.sql.ResultSet;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -25,6 +28,7 @@ public class CursistToevoegenView extends GridPane {
     public Text lblEmail;
     public Text lblPhonenr;
     public Text lblCountryOfOrigin;
+    public Text lblPlaceOfLiving;
             
     public TextField txtFirstName;
     public TextField txtTussenvoegsel;
@@ -32,6 +36,7 @@ public class CursistToevoegenView extends GridPane {
     public TextField txtEmail;
     public TextField txtPhonenr;
     public TextField txtCountryOfOrigin;
+    public TextField txtPlaceOfLiving;
     
     public Button addPerson;
     
@@ -44,6 +49,7 @@ public class CursistToevoegenView extends GridPane {
     lblEmail = new Text("Email cursist: ");
     lblPhonenr = new Text("Telefoonnummer cursist: ");
     lblCountryOfOrigin = new Text("Land van herkomst");
+    lblPlaceOfLiving = new Text("Huidige woonplaats: ");
     
     txtFirstName = new TextField();
     txtTussenvoegsel = new TextField();
@@ -51,9 +57,43 @@ public class CursistToevoegenView extends GridPane {
     txtEmail = new TextField();
     txtPhonenr = new TextField();
     txtCountryOfOrigin = new TextField();
+    txtPlaceOfLiving = new TextField();
     
     
     addPerson = new Button("Cursist toevoegen");
+    
+    addPerson.setOnAction(event->{
+      try{
+          
+        Cursist nieuweCursist = new Cursist();
+        DbConnector dbConnector = new DbConnector();
+        
+        nieuweCursist.setFirstName(txtFirstName.getText());
+        nieuweCursist.setTussenvoegsel(txtTussenvoegsel.getText());
+        nieuweCursist.setSureName(txtSureName.getText());
+        nieuweCursist.setEmail(txtEmail.getText());
+        nieuweCursist.setPhoneNumber(txtPhonenr.getText());
+        nieuweCursist.setCountryOfOrigin(txtCountryOfOrigin.getText());
+        
+        String strQuery = "insert into Cursist values ('"+nieuweCursist.getEmail()+"','" +nieuweCursist.getFirstName()+"','"+nieuweCursist.getTussenvoegsel()+"','"+nieuweCursist.getSureName()+"','"+nieuweCursist.getPhoneNumber()+"','"+nieuweCursist.getCountryOfOrigin()+"','"+nieuweCursist.getPlaceOfLiving()+"')";                                          
+        int result = dbConnector.executeDML(strQuery);
+    
+    txtFirstName.clear();
+    txtTussenvoegsel.clear();
+    txtSureName.clear();
+    txtEmail.clear();
+    txtPhonenr.clear();
+    txtCountryOfOrigin.clear(); 
+    txtPlaceOfLiving.clear();
+    
+    
+      }catch(Exception e){
+          System.out.println(e);
+      }});
+   
+            
+            
+   
     
     this.setPadding(new Insets(10,10,10,10));
     this.setVgap(10);
@@ -65,6 +105,7 @@ public class CursistToevoegenView extends GridPane {
     add(lblEmail,0,4);
     add(lblPhonenr,0,5);
     add(lblCountryOfOrigin,0,6);
+    add(lblPlaceOfLiving,0,7);
     
     add(txtFirstName,1,1);
     add(txtTussenvoegsel,1,2);
@@ -72,8 +113,9 @@ public class CursistToevoegenView extends GridPane {
     add(txtEmail,1,4);
     add(txtPhonenr,1,5);
     add(txtCountryOfOrigin,1,6);
+    add(txtPlaceOfLiving,1,7);
     
-    add(addPerson,1,7);
+    add(addPerson,1,8);
     
     p.getChildren().addAll(this);
     }
