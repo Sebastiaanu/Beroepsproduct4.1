@@ -5,6 +5,8 @@
  */
 package beroepsproductblok4.View;
 
+import beroepsproductblok4.Connector.DbConnector;
+import java.sql.ResultSet;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -20,16 +22,24 @@ import javafx.scene.text.Text;
 public class CursistVerwijderenView extends GridPane {
         public Text lblCursistVerwijderen;
         public Text lblSelectCursist;
+        
         public ComboBox cBSelectCursist;
         public Button selectButton;
+        
+        private DbConnector dbConnector;
         
         public CursistVerwijderenView(Pane p){
             lblCursistVerwijderen = new Text("Cursist verwijderen");
             lblCursistVerwijderen.setFont(Font.font("Verdana",20));
             lblSelectCursist = new Text("Selecteer Cursist ");
+            
             cBSelectCursist = new ComboBox();
             selectButton = new Button("Verwijder Cursist ");
+            
+            dbConnector = new DbConnector();
         
+            vuldeVrijwilligerCombo();
+            
             this.setPadding(new Insets(10,10,10,10));
             this.setVgap(10);
             
@@ -40,6 +50,20 @@ public class CursistVerwijderenView extends GridPane {
             
             p.getChildren().addAll(this);
         }
+
+    private void vuldeVrijwilligerCombo() {
+    ResultSet result = null;
+        try{
+            String strSQL ="select * from cursist";
+            result = dbConnector.getData(strSQL);
+            while(result.next()){
+                String cursistVoornaam = result.getString("Voornaam");
+                cBSelectCursist.getItems().add(cursistVoornaam);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }    
+    }
         
        
 }

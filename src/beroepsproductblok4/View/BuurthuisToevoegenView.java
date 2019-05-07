@@ -28,6 +28,7 @@ public class BuurthuisToevoegenView extends GridPane{
     public Text lblCity;
     public Text lblContactPerson;
     public Text lblPhonenr;
+    private Text lblDatabaseError;
             
     public TextField txtName;
     public TextField txtAdres;
@@ -47,6 +48,8 @@ public class BuurthuisToevoegenView extends GridPane{
         lblCity = new Text("Stad/dorp buurthuis toevoegen: ");
         lblContactPerson = new Text("Contactpersoon buurthuis toevoegen: ");
         lblPhonenr = new Text("Telefoonnummer buurthuis toevoegen: ");
+        lblDatabaseError = new Text("Fout in database");
+        lblDatabaseError.setVisible(false);
         
         txtName = new TextField();
         txtAdres = new TextField();
@@ -61,7 +64,8 @@ public class BuurthuisToevoegenView extends GridPane{
             try{
             buurthuisToevoegen();
             }catch(Exception e){
-                System.out.println(e);
+                lblDatabaseError.setText("Foutmelding " + e);
+                lblDatabaseError.setVisible(true);
             }
         });
         
@@ -75,6 +79,7 @@ public class BuurthuisToevoegenView extends GridPane{
         add(lblCity,0,4);
         add(lblContactPerson,0,5);
         add(lblPhonenr,0,6);
+        add(lblDatabaseError,1,8);
         
        add(txtName,1,1);
        add(txtAdres,1,2);
@@ -82,6 +87,7 @@ public class BuurthuisToevoegenView extends GridPane{
        add(txtCity,1,4);
        add(txtContactPerson,1,5);
        add(txtPhonenr,1,6);
+       
        
        add(addBuurthuis,1,7);
         
@@ -100,7 +106,7 @@ public class BuurthuisToevoegenView extends GridPane{
             nieuwBuurthuis.setContactPerson(txtContactPerson.getText());
             nieuwBuurthuis.setPhoneNumber(txtPhonenr.getText());
             
-            String strQuery = "INSERT INTO Buurthuis VALUES ('"+nieuwBuurthuis.getName()+"','" +nieuwBuurthuis.getAdres()+"','"+nieuwBuurthuis.getPostalCode()+"','"+nieuwBuurthuis.getCity()+"','"+nieuwBuurthuis.getContactPerson()+"','"+nieuwBuurthuis.getPhoneNumber()+"'";                                          
+            String strQuery = "INSERT INTO Buurthuis VALUES ('"+nieuwBuurthuis.getPhoneNumber()+"','" +nieuwBuurthuis.getName()+"','"+nieuwBuurthuis.getAdres()+"','"+nieuwBuurthuis.getPostalCode()+"','"+nieuwBuurthuis.getContactPerson()+"','"+nieuwBuurthuis.getCity()+"')";                                          
             int result = dbConnector.executeDML(strQuery);
             if(result == 1){
                 //gelukt, clear de tekstvelden
@@ -112,7 +118,7 @@ public class BuurthuisToevoegenView extends GridPane{
                 txtPhonenr.clear();
             }else{
                 //niet gelukt, laat de tekst staan en geef een waarschuwing
-                
+                lblDatabaseError.setVisible(true);
             }
             
     }

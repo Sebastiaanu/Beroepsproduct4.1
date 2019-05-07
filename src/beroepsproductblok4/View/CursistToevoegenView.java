@@ -120,7 +120,7 @@ public class CursistToevoegenView extends GridPane {
         nieuweCursist.setPhoneNumber(txtPhonenr.getText());
         nieuweCursist.setCountryOfOrigin(txtCountryOfOrigin.getText());
         
-        
+        //naam van sequence is seq_cursist.
         String strQuery = "insert into Cursist values (seq_cursist.nextval,'"+nieuweCursist.getEmail()+"','" +nieuweCursist.getFirstName()+"','"+nieuweCursist.getTussenvoegsel()+"','"+nieuweCursist.getSureName()+"','"+nieuweCursist.getPhoneNumber()+"','"+nieuweCursist.getCountryOfOrigin()+"','"+nieuweCursist.getPlaceOfLiving()+"')";                                          
         int result = dbConnector.executeDML(strQuery);
         

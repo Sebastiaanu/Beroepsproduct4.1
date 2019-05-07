@@ -65,7 +65,7 @@ public class VrijwilligerToevoegenView extends GridPane{
         try{
         vrijwilligerToevoegen();
         }catch(Exception e){
-        lblDatabaseError.setText("Foutmelding" + e);
+        lblDatabaseError.setText("Foutmelding " + e);
         lblDatabaseError.setVisible(true);
         }
     });
@@ -104,6 +104,7 @@ public class VrijwilligerToevoegenView extends GridPane{
         nieuweVrijwilliger.setPhoneNumber(txtPhonenr.getText());
         nieuweVrijwilliger.setPlaceOfLiving(txtPlaceOfLiving.getText());
         
+        //vrijwilliger heeft geen sequence omdat email primary key is.
         String strQuery = "INSERT INTO Vrijwilliger VALUES ('"+nieuweVrijwilliger.getEmail()+"','" +nieuweVrijwilliger.getFirstName()+"','"+nieuweVrijwilliger.getTussenvoegsel()+"','"+nieuweVrijwilliger.getSureName()+"','"+nieuweVrijwilliger.getPhoneNumber()+"','"+nieuweVrijwilliger.getPlaceOfLiving()+"')";
         int result = dbConnector.executeDML(strQuery);
         if(result == 1){
