@@ -58,24 +58,11 @@ public class BuurthuisToevoegenView extends GridPane{
         addBuurthuis = new Button("Buurthuis Toevoegen");
         
         addBuurthuis.setOnAction(event->{
-            Buurthuis nieuwBuurthuis = new Buurthuis();
-            DbConnector dbConnector = new DbConnector();
-            
-            nieuwBuurthuis.setName(txtName.getText());
-            nieuwBuurthuis.setAdres(txtAdres.getText());
-            nieuwBuurthuis.setPostalCode(txtPostalCode.getText());
-            nieuwBuurthuis.setCity(txtCity.getText());
-            nieuwBuurthuis.setContactPerson(txtContactPerson.getText());
-            nieuwBuurthuis.setPhoneNumber(txtPhonenr.getText());
-            
-            String strSQL = "Insert into Buurthuis";
-            ResultSet result = dbConnector.getData(strSQL);
             try{
-                
+            buurthuisToevoegen();
             }catch(Exception e){
-                
+                System.out.println(e);
             }
-            
         });
         
         this.setPadding(new Insets(10,10,10,10));
@@ -100,6 +87,34 @@ public class BuurthuisToevoegenView extends GridPane{
         
         p.getChildren().addAll(this);
     
+    }
+
+    private void buurthuisToevoegen() {
+            Buurthuis nieuwBuurthuis = new Buurthuis();
+            DbConnector dbConnector = new DbConnector();
+            
+            nieuwBuurthuis.setName(txtName.getText());
+            nieuwBuurthuis.setAdres(txtAdres.getText());
+            nieuwBuurthuis.setPostalCode(txtPostalCode.getText());
+            nieuwBuurthuis.setCity(txtCity.getText());
+            nieuwBuurthuis.setContactPerson(txtContactPerson.getText());
+            nieuwBuurthuis.setPhoneNumber(txtPhonenr.getText());
+            
+            String strQuery = "INSERT INTO Buurthuis VALUES ('"+nieuwBuurthuis.getName()+"','" +nieuwBuurthuis.getAdres()+"','"+nieuwBuurthuis.getPostalCode()+"','"+nieuwBuurthuis.getCity()+"','"+nieuwBuurthuis.getContactPerson()+"','"+nieuwBuurthuis.getPhoneNumber()+"'";                                          
+            int result = dbConnector.executeDML(strQuery);
+            if(result == 1){
+                //gelukt, clear de tekstvelden
+                txtName.clear();
+                txtAdres.clear();
+                txtPostalCode.clear();
+                txtCity.clear();
+                txtContactPerson.clear();
+                txtPhonenr.clear();
+            }else{
+                //niet gelukt, laat de tekst staan en geef een waarschuwing
+                
+            }
+            
     }
     
 }
