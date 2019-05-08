@@ -38,7 +38,7 @@ public class CursistVerwijderenView extends GridPane {
             
             dbConnector = new DbConnector();
         
-            vuldeVrijwilligerCombo();
+            vuldeCursistCombo();
             
             selectButton.setOnAction(event->{
             try{
@@ -59,7 +59,7 @@ public class CursistVerwijderenView extends GridPane {
             p.getChildren().addAll(this);
         }
 
-    private void vuldeVrijwilligerCombo() {
+    private void vuldeCursistCombo() {
     ResultSet result = null;
         try{
             String strSQL ="select * from cursist";
@@ -71,7 +71,7 @@ public class CursistVerwijderenView extends GridPane {
                 cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam + " , "+cursistTussenVoegsel );
             }
         }catch(Exception e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }    
     }
 
@@ -91,7 +91,7 @@ public class CursistVerwijderenView extends GridPane {
                 //Niet gelukt
             }
         }catch(Exception e){
-            
+            System.out.println(e.getMessage());
         }
     }
         
