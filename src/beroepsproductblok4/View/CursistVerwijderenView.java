@@ -40,6 +40,14 @@ public class CursistVerwijderenView extends GridPane {
         
             vuldeVrijwilligerCombo();
             
+            selectButton.setOnAction(event->{
+            try{
+                verwijderCursist();
+            }catch(Exception e){
+                
+            }
+            });
+            
             this.setPadding(new Insets(10,10,10,10));
             this.setVgap(10);
             
@@ -58,11 +66,33 @@ public class CursistVerwijderenView extends GridPane {
             result = dbConnector.getData(strSQL);
             while(result.next()){
                 String cursistVoornaam = result.getString("Voornaam");
-                cBSelectCursist.getItems().add(cursistVoornaam);
+                String cursistAchternaam = result.getString("Achternaam"); 
+                String cursistTussenVoegsel = result.getString("Tussenvoegsel");
+                cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam + " , "+cursistTussenVoegsel );
             }
         }catch(Exception e){
             System.out.println(e);
         }    
+    }
+
+    private void verwijderCursist() {
+        try{
+            String cbContent = (cBSelectCursist.getValue().toString());
+            String[] splitted = cbContent.split(" ");
+            System.out.println(splitted[0]);
+            System.out.println(splitted[1]);
+            System.out.println(splitted[3]);
+            
+            String strSQL = "DELETE FROM Cursist WHERE VOORNAAM = ('"+splitted[0]+"') AND ACHTERNAAM = ('"+splitted[1]+"') AND TUSSENVOEGSEL ('"+splitted[3]+"')";
+            int result = dbConnector.executeDML(strSQL);
+            if(result == 1){
+                
+            }else{
+                //Niet gelukt
+            }
+        }catch(Exception e){
+            
+        }
     }
         
        
