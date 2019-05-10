@@ -5,7 +5,8 @@
  */
 package beroepsproductblok4.View;
 
-import javafx.collections.ObservableList;
+import beroepsproductblok4.Connector.DbConnector;
+import java.sql.ResultSet;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -18,18 +19,28 @@ import javafx.scene.text.Text;
  *
  * @author jelmu
  */
+
 public class BuurthuisVerwijderenView extends GridPane{
     public Text lblBuurthuisVerwijderen;
     public Text lblSelectBuurthuis;
     public ComboBox cBSelectBuurthuis;
+    
     public Button selectButton;
+    
+    private DbConnector dbConnector;
     
     public BuurthuisVerwijderenView(Pane p) {
         lblBuurthuisVerwijderen = new Text("Verwijderen Buurthuis");
         lblBuurthuisVerwijderen.setFont(Font.font("Verdana",20));
         lblSelectBuurthuis = new Text("Selecteer Buurthuis ");
         cBSelectBuurthuis = new ComboBox();
+        
         selectButton = new Button("Verwijder buurthuis");
+        dbConnector = new DbConnector();
+        
+        
+        
+        vulDeBuurthuisCombo();
         
         this.setPadding(new Insets(10,10,10,10));
         this.setVgap(10);
@@ -39,9 +50,24 @@ public class BuurthuisVerwijderenView extends GridPane{
         add(cBSelectBuurthuis,0,2);
         add(selectButton,1,2);
         
+       
+        
         p.getChildren().addAll(this);
     }
 
+    private void vulDeBuurthuisCombo() {
+        ResultSet result = null;
+        try{
+            String strSQL ="SELECT * FROM Buurthuis";
+            result = dbConnector.getData(strSQL);
+            while(result.next()){
+                String buurthuisNaam = result.getString("Naam");
+                cBSelectBuurthuis.getItems().add(buurthuisNaam);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
    
 
     

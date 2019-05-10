@@ -22,9 +22,11 @@ public class DbConnector {
         Connection conn = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            String strConnString = "jdbc:oracle:thin:@localhost:1521:xe";
-            conn = DriverManager.getConnection(strConnString, "avanstaxi", "avans");
+            String strConnString = "jdbc:oracle:thin:@145.49.68.237:1521:xe";
+            conn = DriverManager.getConnection(strConnString, "DATABASE4", "Muis1993");
         } catch (Exception e) {
+            System.out.println("ERROR");
+            System.out.println(e.getMessage());
             // error
 
         }
@@ -36,6 +38,7 @@ public class DbConnector {
             Statement stmt = createConnection().createStatement();
             result = stmt.executeQuery(strSQL);
         } catch (Exception e) {
+            System.out.println("ERROR");
             //error
         }
         return result;

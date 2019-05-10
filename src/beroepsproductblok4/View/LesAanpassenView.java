@@ -13,11 +13,9 @@ import javafx.scene.layout.Pane;
  */
 public class LesAanpassenView {
 
-    public LesAanpassenView() {
-    }
 
     public LesAanpassenView(Pane mainPane) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }
