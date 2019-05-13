@@ -20,11 +20,11 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class CursistVerwijderenView extends GridPane {
-        public Text lblCursistVerwijderen;
-        public Text lblSelectCursist;
+        private Text lblCursistVerwijderen;
+        private Text lblSelectCursist;
         
-        public ComboBox cBSelectCursist;
-        public Button selectButton;
+        private ComboBox cBSelectCursist;
+        private Button selectButton;
         
         private DbConnector dbConnector;
         
@@ -62,13 +62,19 @@ public class CursistVerwijderenView extends GridPane {
     private void vuldeCursistCombo() {
     ResultSet result = null;
         try{
-            String strSQL ="select * from cursist";
+            String strSQL ="SELECT * FROM Cursist";
             result = dbConnector.getData(strSQL);
             while(result.next()){
                 String cursistVoornaam = result.getString("Voornaam");
                 String cursistAchternaam = result.getString("Achternaam"); 
                 String cursistTussenVoegsel = result.getString("Tussenvoegsel");
-                cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam + " , "+cursistTussenVoegsel );
+                String cursistEmail = result.getString("Email");
+                if(cursistTussenVoegsel == null){
+                  cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam + " , "+cursistEmail ); 
+                }else{
+                    cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam + " , "+cursistTussenVoegsel+ "  " + cursistEmail );
+                }
+                
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -79,17 +85,21 @@ public class CursistVerwijderenView extends GridPane {
         try{
             String cbContent = (cBSelectCursist.getValue().toString());
             String[] splitted = cbContent.split(" ");
-            System.out.println(splitted[0]);
-            System.out.println(splitted[1]);
-            System.out.println(splitted[3]);
-            
-            String strSQL = "DELETE FROM Cursist WHERE VOORNAAM = ('"+splitted[0]+"') AND ACHTERNAAM = ('"+splitted[1]+"') AND TUSSENVOEGSEL ('"+splitted[3]+"')";
-            int result = dbConnector.executeDML(strSQL);
-            if(result == 1){
+                System.out.println(splitted[0]);
+                System.out.println(splitted[1]);
+                System.out.println(splitted[2]);
+                System.out.println(splitted[3]);
+                System.out.println(splitted[4]);
                 
-            }else{
-                //Niet gelukt
-            }
+                
+//            if(splitted[5]==null){
+//            String strSQL = "DELETE FROM Cursist WHERE Email = ('"+splitted[5]+"')";
+//            int result = dbConnector.executeDML(strSQL);
+//            }else{
+//               String strSQL = "DELETE FROM Cursist WHERE Email = ('"+splitted[5]+"')";
+//            int result = dbConnector.executeDML(strSQL); 
+//            }
+//            
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

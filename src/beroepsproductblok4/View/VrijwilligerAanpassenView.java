@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class VrijwilligerAanpassenView extends GridPane {
-    public Text lblVrijwilligerAanpassen;
+    private Text lblVrijwilligerAanpassen;
     
 
  public VrijwilligerAanpassenView(Pane p){

@@ -21,23 +21,23 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class BuurthuisToevoegenView extends GridPane{
-    public Text lblBuurthuisToevoegen;
-    public Text lblName;
-    public Text lblAdres;
-    public Text lblPostalCode;
-    public Text lblCity;
-    public Text lblContactPerson;
-    public Text lblPhonenr;
+    private Text lblBuurthuisToevoegen;
+    private Text lblName;
+    private Text lblAdres;
+    private Text lblPostalCode;
+    private Text lblCity;
+    private Text lblContactPerson;
+    private Text lblPhonenr;
     private Text lblDatabaseError;
             
-    public TextField txtName;
-    public TextField txtAdres;
-    public TextField txtPostalCode;
-    public TextField txtCity;
-    public TextField txtContactPerson;
-    public TextField txtPhonenr;
+    private TextField txtName;
+    private TextField txtAdres;
+    private TextField txtPostalCode;
+    private TextField txtCity;
+    private TextField txtContactPerson;
+    private TextField txtPhonenr;
     
-    public Button addBuurthuis;
+    private Button addBuurthuis;
     
     public BuurthuisToevoegenView(Pane p) {
         lblBuurthuisToevoegen = new Text("Buurthuis toevoegen");

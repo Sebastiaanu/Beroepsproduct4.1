@@ -20,11 +20,11 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class BuurthuisVerwijderenView extends GridPane{
-    public Text lblBuurthuisVerwijderen;
-    public Text lblSelectBuurthuis;
-    public ComboBox cBSelectBuurthuis;
+    private Text lblBuurthuisVerwijderen;
+    private Text lblSelectBuurthuis;
+    private ComboBox cBSelectBuurthuis;
     
-    public Button selectButton;
+    private Button selectButton;
     
     private DbConnector dbConnector;
     
@@ -36,10 +36,16 @@ public class BuurthuisVerwijderenView extends GridPane{
         
         selectButton = new Button("Verwijder buurthuis");
         dbConnector = new DbConnector();
-        
-        
-        
+             
         vulDeBuurthuisCombo();
+        
+        selectButton.setOnAction(event->{
+            try{
+            verwijderBuurthuis();
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+            });
         
         this.setPadding(new Insets(10,10,10,10));
         this.setVgap(10);
@@ -67,8 +73,25 @@ public class BuurthuisVerwijderenView extends GridPane{
             System.out.println(e);
         }
     }
+    
+    private void verwijderBuurthuis() {
+        try{
+            String cbContent = (cBSelectBuurthuis.getValue().toString());
+            System.out.println(cbContent);
+            String strSQL = "DELETE FROM BUURTHUIS WHERE NAAM = ('"+cbContent+"')";
+            int result = dbConnector.executeDML(strSQL);
+            if(result == 1){
+                //gelukt
+            }else{
+                //niet gelukt
+            }
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
    
 
     
     
+}
 }

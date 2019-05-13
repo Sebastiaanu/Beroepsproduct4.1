@@ -20,24 +20,24 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class VrijwilligerToevoegenView extends GridPane{
-    public Text lblVrijwilligerToevoegen;
-    public Text lblFirstName;
-    public Text lblTussenvoegsel;
-    public Text lblSureName;
-    public Text lblEmail;
-    public Text lblPhonenr;
-    public Text lblPlaceOfLiving;
+    private Text lblVrijwilligerToevoegen;
+    private Text lblFirstName;
+    private Text lblTussenvoegsel;
+    private Text lblSureName;
+    private Text lblEmail;
+    private Text lblPhonenr;
+    private Text lblPlaceOfLiving;
     
-    public Text lblDatabaseError;
+    private Text lblDatabaseError;
             
-    public TextField txtFirstName;
-    public TextField txtTussenvoegsel;
-    public TextField txtSureName;
-    public TextField txtEmail;
-    public TextField txtPhonenr;
-    public TextField txtPlaceOfLiving;
+    private TextField txtFirstName;
+    private TextField txtTussenvoegsel;
+    private TextField txtSureName;
+    private TextField txtEmail;
+    private TextField txtPhonenr;
+    private TextField txtPlaceOfLiving;
     
-    public Button addPerson;
+    private Button addPerson;
     
     public VrijwilligerToevoegenView(Pane p) {
     lblVrijwilligerToevoegen = new Text("Vrijwilliger toevoegen");

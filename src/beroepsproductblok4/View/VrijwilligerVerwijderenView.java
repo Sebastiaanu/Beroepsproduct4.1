@@ -20,10 +20,10 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class VrijwilligerVerwijderenView extends GridPane {
-        public Text lblVrijwilligerVerwijderen;
-        public Text lblSelectVrijwilliger;
-        public ComboBox cBSelectVrijwilliger;
-        public Button selectButton;
+        private Text lblVrijwilligerVerwijderen;
+        private Text lblSelectVrijwilliger;
+        private ComboBox cBSelectVrijwilliger;
+        private Button selectButton;
         private DbConnector dbConnector;
         
     public VrijwilligerVerwijderenView(Pane p) {
@@ -66,7 +66,14 @@ public class VrijwilligerVerwijderenView extends GridPane {
                 String vrijwilligerVoornaam = result.getString("Voornaam");
                 String vrijwilligerAchternaam = result.getString("Achternaam");
                 String vrijwilligerTussenvoegsel = result.getString("Tussenvoegsel");
-                cBSelectVrijwilliger.getItems().add(vrijwilligerVoornaam+ " " + vrijwilligerAchternaam + " , "+ vrijwilligerTussenvoegsel);
+                String vrijwilligerEmail = result.getString("Email");
+                if(vrijwilligerTussenvoegsel == null){
+                    cBSelectVrijwilliger.getItems().add(vrijwilligerVoornaam+ " " + vrijwilligerAchternaam +" " + vrijwilligerEmail);
+                }else{
+                    cBSelectVrijwilliger.getItems().add(vrijwilligerVoornaam+ " " + vrijwilligerAchternaam + " , "+ vrijwilligerTussenvoegsel + "  " + vrijwilligerEmail);
+                }
+                
+                
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -78,13 +85,18 @@ public class VrijwilligerVerwijderenView extends GridPane {
         try{
             String cbContent = (cBSelectVrijwilliger.getValue().toString());
             String[] splitted = cbContent.split(" ");
-            String strSQL = "DELETE FROM Vrijwilliger WHERE VOORNAAM = ('"+splitted[0]+"') AND ACHTERNAAM = ('"+splitted[1]+"') AND TUSSENVOEGSEL ('"+splitted[3]+"')";
-            int result = dbConnector.executeDML(strSQL);
-            if(result == 1){
-                //gelukt
+            
+            
+            if(splitted[5]== null){
+                String strSQLnoNull = "DELETE FROM Vrijwilliger WHERE Email = ('"+splitted[2]+"')";
+            int result = dbConnector.executeDML(strSQLnoNull);
             }else{
-                //niet gelukt
+            
+                String strSQLnoNull = "DELETE FROM Vrijwilliger WHERE Email = ('"+splitted[5]+"')";
+            int result = dbConnector.executeDML(strSQLnoNull);
             }
+            
+            
             
         }catch(Exception e){
             System.out.println(e.getMessage());

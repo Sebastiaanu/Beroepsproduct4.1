@@ -21,26 +21,26 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class CursistToevoegenView extends GridPane {
-    public Text lblCursistToevoegenView;
-    public Text lblFirstName;
-    public Text lblTussenvoegsel;
-    public Text lblSureName;
-    public Text lblEmail;
-    public Text lblPhonenr;
-    public Text lblCountryOfOrigin;
-    public Text lblPlaceOfLiving;
+    private Text lblCursistToevoegenView;
+    private Text lblFirstName;
+    private Text lblTussenvoegsel;
+    private Text lblSureName;
+    private Text lblEmail;
+    private Text lblPhonenr;
+    private Text lblCountryOfOrigin;
+    private Text lblPlaceOfLiving;
     
-    public Text lblDatabaseError;
+    private Text lblDatabaseError;
             
-    public TextField txtFirstName;
-    public TextField txtTussenvoegsel;
-    public TextField txtSureName;
-    public TextField txtEmail;
-    public TextField txtPhonenr;
-    public TextField txtCountryOfOrigin;
-    public TextField txtPlaceOfLiving;
+    private TextField txtFirstName;
+    private TextField txtTussenvoegsel;
+    private TextField txtSureName;
+    private TextField txtEmail;
+    private TextField txtPhonenr;
+    private TextField txtCountryOfOrigin;
+    private TextField txtPlaceOfLiving;
     
-    public Button addPerson;
+    private Button addPerson;
     
     public CursistToevoegenView(Pane p) {
     lblCursistToevoegenView = new Text("Toevoegen Cursist");
@@ -119,6 +119,9 @@ public class CursistToevoegenView extends GridPane {
         nieuweCursist.setEmail(txtEmail.getText());
         nieuweCursist.setPhoneNumber(txtPhonenr.getText());
         nieuweCursist.setCountryOfOrigin(txtCountryOfOrigin.getText());
+        nieuweCursist.setPlaceOfLiving(txtPlaceOfLiving.getText());
+        
+        
         
         //naam van sequence is seq_cursist.
         String strQuery = "insert into Cursist values (seq_cursist.nextval,'"+nieuweCursist.getEmail()+"','" +nieuweCursist.getFirstName()+"','"+nieuweCursist.getTussenvoegsel()+"','"+nieuweCursist.getSureName()+"','"+nieuweCursist.getPhoneNumber()+"','"+nieuweCursist.getCountryOfOrigin()+"','"+nieuweCursist.getPlaceOfLiving()+"')";                                          
