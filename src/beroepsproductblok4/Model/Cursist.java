@@ -9,9 +9,10 @@ package beroepsproductblok4.Model;
  *
  * @author jelmu
  */
-public class Cursist extends Persoon{
-    int idCursist;
-    String countryOfOrigin;
+public class Cursist extends Persoon {
+
+    private int idCursist;
+    private String countryOfOrigin;
 
     public int getIdCursist() {
         return idCursist;
@@ -32,5 +33,5 @@ public class Cursist extends Persoon{
     public String getPlaceOfLiving() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
