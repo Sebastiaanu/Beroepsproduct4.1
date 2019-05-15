@@ -157,7 +157,7 @@ public class BuurthuisAanpassenView extends GridPane {
     public void editNaarDatabase(){
        
         try{
-            System.out.println("Oude nummer is: "+oudNummer);
+            
             String strSQL = "UPDATE Buurthuis SET NAAM = ('"+txtName.getText()+"'), ADRES = ('"+txtAdres.getText()+"'), POSTCODE = ('"+txtPostalCode.getText()+"'), CONTACTPERSOON = ('"+txtContactPerson.getText()+"'), PLAATS = ('"+txtCity.getText()+"') WHERE TELNR = ('"+oudNummer+"')"; 
             int result = dbConnector.executeDML(strSQL);
             if(result ==1){
