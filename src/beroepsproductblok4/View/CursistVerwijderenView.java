@@ -5,6 +5,9 @@
  */
 package beroepsproductblok4.View;
 
+import beroepsproductblok4.Connector.DbConnector;
+import beroepsproductblok4.Model.Cursist;
+import java.sql.ResultSet;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -18,18 +21,34 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class CursistVerwijderenView extends GridPane {
-        public Text lblCursistVerwijderen;
-        public Text lblSelectCursist;
-        public ComboBox cBSelectCursist;
-        public Button selectButton;
+        private Text lblCursistVerwijderen;
+        private Text lblSelectCursist;
+        
+        private ComboBox cBSelectCursist;
+        private Button selectButton;
+        
+        private DbConnector dbConnector;
         
         public CursistVerwijderenView(Pane p){
             lblCursistVerwijderen = new Text("Cursist verwijderen");
             lblCursistVerwijderen.setFont(Font.font("Verdana",20));
             lblSelectCursist = new Text("Selecteer Cursist ");
+            
             cBSelectCursist = new ComboBox();
             selectButton = new Button("Verwijder Cursist ");
+            
+            dbConnector = new DbConnector();
         
+            vuldeCursistCombo();
+            
+            selectButton.setOnAction(event->{
+            try{
+                verwijderCursist();
+            }catch(Exception e){
+                
+            }
+            });
+            
             this.setPadding(new Insets(10,10,10,10));
             this.setVgap(10);
             
@@ -40,6 +59,60 @@ public class CursistVerwijderenView extends GridPane {
             
             p.getChildren().addAll(this);
         }
+
+    private void vuldeCursistCombo() {
+    ResultSet result = null;
+    Cursist cursist = new Cursist();
+        try{
+            String strSQL ="SELECT * FROM Cursist";
+            result = dbConnector.getData(strSQL);
+            while(result.next()){
+                String cursistVoornaam = result.getString("Voornaam");
+                String cursistAchternaam = result.getString("Achternaam"); 
+                String cursistTussenVoegsel = result.getString("Tussenvoegsel");
+                String cursistEmail = result.getString("Email");
+                
+                if(cursistTussenVoegsel == null){
+                  cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam); 
+                }else{
+                    cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam + " , "+ cursistTussenVoegsel);
+                }
+                
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }    
+    }
+
+    private void verwijderCursist() {
+        try{
+            Cursist cursist = new Cursist();
+            String cbContent = (cBSelectCursist.getValue().toString());
+            String[] splitted = cbContent.split(" ");
+            
+            cursist.setFirstName(splitted[0]);
+            cursist.setTussenvoegsel(splitted[3]);
+            cursist.setSureName(splitted[1]);
+            
+                System.out.println(splitted[0]);
+                System.out.println(splitted[1]);
+                System.out.println(splitted[2]);
+                System.out.println(splitted[3]);
+                
+                
+                
+            if(splitted[3]== "2"){
+            String strSQL = "DELETE FROM Cursist WHERE Email = ('"+splitted[5]+"')";
+            int result = dbConnector.executeDML(strSQL);
+            }else{
+               String strSQL = "DELETE FROM Cursist WHERE Email = ('"+splitted[5]+"')";
+            int result = dbConnector.executeDML(strSQL); 
+            }
+//            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
         
        
 }

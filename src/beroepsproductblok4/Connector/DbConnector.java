@@ -22,11 +22,12 @@ public class DbConnector {
         Connection conn = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            String strConnString = "jdbc:oracle:thin:@145.49.68.237:1521:xe";
+
+            String strConnString = "jdbc:oracle:thin:@localhost:1521:XE";
             conn = DriverManager.getConnection(strConnString, "DATABASE4", "Muis1993");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            // error
+
 
         }
         return conn;
@@ -44,7 +45,9 @@ public class DbConnector {
         return result;
     }
     
-    public int executeDML(String strSQL){
+
+     public int executeDML(String strSQL){
+
         int result = 0;
         try{
             Statement stmt = createConnection().createStatement();

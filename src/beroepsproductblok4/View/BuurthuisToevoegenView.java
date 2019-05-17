@@ -21,22 +21,23 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class BuurthuisToevoegenView extends GridPane{
-    public Text lblBuurthuisToevoegen;
-    public Text lblName;
-    public Text lblAdres;
-    public Text lblPostalCode;
-    public Text lblCity;
-    public Text lblContactPerson;
-    public Text lblPhonenr;
+    private Text lblBuurthuisToevoegen;
+    private Text lblName;
+    private Text lblAdres;
+    private Text lblPostalCode;
+    private Text lblCity;
+    private Text lblContactPerson;
+    private Text lblPhonenr;
+    private Text lblDatabaseError;
             
-    public TextField txtName;
-    public TextField txtAdres;
-    public TextField txtPostalCode;
-    public TextField txtCity;
-    public TextField txtContactPerson;
-    public TextField txtPhonenr;
+    private TextField txtName;
+    private TextField txtAdres;
+    private TextField txtPostalCode;
+    private TextField txtCity;
+    private TextField txtContactPerson;
+    private TextField txtPhonenr;
     
-    public Button addBuurthuis;
+    private Button addBuurthuis;
     
     public BuurthuisToevoegenView(Pane p) {
         lblBuurthuisToevoegen = new Text("Buurthuis toevoegen");
@@ -47,6 +48,8 @@ public class BuurthuisToevoegenView extends GridPane{
         lblCity = new Text("Stad/dorp buurthuis toevoegen: ");
         lblContactPerson = new Text("Contactpersoon buurthuis toevoegen: ");
         lblPhonenr = new Text("Telefoonnummer buurthuis toevoegen: ");
+        lblDatabaseError = new Text("Fout in database");
+        lblDatabaseError.setVisible(false);
         
         txtName = new TextField();
         txtAdres = new TextField();
@@ -58,24 +61,12 @@ public class BuurthuisToevoegenView extends GridPane{
         addBuurthuis = new Button("Buurthuis Toevoegen");
         
         addBuurthuis.setOnAction(event->{
-            Buurthuis nieuwBuurthuis = new Buurthuis();
-            DbConnector dbConnector = new DbConnector();
-            
-            nieuwBuurthuis.setName(txtName.getText());
-            nieuwBuurthuis.setAdres(txtAdres.getText());
-            nieuwBuurthuis.setPostalCode(txtPostalCode.getText());
-            nieuwBuurthuis.setCity(txtCity.getText());
-            nieuwBuurthuis.setContactPerson(txtContactPerson.getText());
-            nieuwBuurthuis.setPhoneNumber(txtPhonenr.getText());
-            
-            String strSQL = "Insert into Buurthuis";
-            ResultSet result = dbConnector.getData(strSQL);
             try{
-                
+            buurthuisToevoegen();
             }catch(Exception e){
-                
+                lblDatabaseError.setText("Foutmelding " + e);
+                lblDatabaseError.setVisible(true);
             }
-            
         });
         
         this.setPadding(new Insets(10,10,10,10));
@@ -88,6 +79,7 @@ public class BuurthuisToevoegenView extends GridPane{
         add(lblCity,0,4);
         add(lblContactPerson,0,5);
         add(lblPhonenr,0,6);
+        add(lblDatabaseError,1,8);
         
        add(txtName,1,1);
        add(txtAdres,1,2);
@@ -96,10 +88,39 @@ public class BuurthuisToevoegenView extends GridPane{
        add(txtContactPerson,1,5);
        add(txtPhonenr,1,6);
        
+       
        add(addBuurthuis,1,7);
         
         p.getChildren().addAll(this);
     
+    }
+
+    private void buurthuisToevoegen() {
+            Buurthuis nieuwBuurthuis = new Buurthuis();
+            DbConnector dbConnector = new DbConnector();
+            
+            nieuwBuurthuis.setName(txtName.getText());
+            nieuwBuurthuis.setAdres(txtAdres.getText());
+            nieuwBuurthuis.setPostalCode(txtPostalCode.getText());
+            nieuwBuurthuis.setCity(txtCity.getText());
+            nieuwBuurthuis.setContactPerson(txtContactPerson.getText());
+            nieuwBuurthuis.setPhoneNumber(txtPhonenr.getText());
+            
+            String strQuery = "INSERT INTO Buurthuis VALUES ('"+nieuwBuurthuis.getPhoneNumber()+"','" +nieuwBuurthuis.getName()+"','"+nieuwBuurthuis.getAdres()+"','"+nieuwBuurthuis.getPostalCode()+"','"+nieuwBuurthuis.getContactPerson()+"','"+nieuwBuurthuis.getCity()+"')";                                          
+            int result = dbConnector.executeDML(strQuery);
+            if(result == 1){
+                //gelukt, clear de tekstvelden
+                txtName.clear();
+                txtAdres.clear();
+                txtPostalCode.clear();
+                txtCity.clear();
+                txtContactPerson.clear();
+                txtPhonenr.clear();
+            }else{
+                //niet gelukt, laat de tekst staan en geef een waarschuwing
+                lblDatabaseError.setVisible(true);
+            }
+            
     }
     
 }
