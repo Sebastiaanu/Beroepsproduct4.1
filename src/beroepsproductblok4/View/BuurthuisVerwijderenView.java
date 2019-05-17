@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
  *
  * @author jelmu
  */
+
 public class BuurthuisVerwijderenView extends GridPane {
 
     private Text lblBuurthuisVerwijderen;
@@ -34,6 +35,7 @@ public class BuurthuisVerwijderenView extends GridPane {
         lblBuurthuisVerwijderen.setFont(Font.font("Verdana", 20));
         lblSelectBuurthuis = new Text("Selecteer Buurthuis ");
         cBSelectBuurthuis = new ComboBox();
+
 
         selectButton = new Button("Verwijder buurthuis");
         dbConnector = new DbConnector();
@@ -56,11 +58,13 @@ public class BuurthuisVerwijderenView extends GridPane {
         add(cBSelectBuurthuis, 0, 2);
         add(selectButton, 1, 2);
 
+
         p.getChildren().addAll(this);
     }
 
     private void vulDeBuurthuisCombo() {
         ResultSet result = null;
+
         try {
             String strSQL = "SELECT * FROM Buurthuis";
             result = dbConnector.getData(strSQL);
@@ -72,6 +76,7 @@ public class BuurthuisVerwijderenView extends GridPane {
             System.out.println(e);
         }
     }
+
 
     private void verwijderBuurthuis() {
         try {

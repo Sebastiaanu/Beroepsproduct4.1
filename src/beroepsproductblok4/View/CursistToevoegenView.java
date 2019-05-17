@@ -7,7 +7,10 @@ package beroepsproductblok4.View;
 
 import beroepsproductblok4.Connector.DbConnector;
 import beroepsproductblok4.Model.Cursist;
+
 import java.sql.ResultSet;
+
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -21,6 +24,7 @@ import javafx.scene.text.Text;
  * @author jelmu
  */
 public class CursistToevoegenView extends GridPane {
+
     private Text lblCursistToevoegenView;
     private Text lblFirstName;
     private Text lblTussenvoegsel;
@@ -119,11 +123,13 @@ public class CursistToevoegenView extends GridPane {
         nieuweCursist.setEmail(txtEmail.getText());
         nieuweCursist.setPhoneNumber(txtPhonenr.getText());
         nieuweCursist.setCountryOfOrigin(txtCountryOfOrigin.getText());
+
         nieuweCursist.setPlaceOfLiving(txtPlaceOfLiving.getText());
         
         
         
         //naam van sequence is seq_cursist.
+
         String strQuery = "insert into Cursist values (seq_cursist.nextval,'"+nieuweCursist.getEmail()+"','" +nieuweCursist.getFirstName()+"','"+nieuweCursist.getTussenvoegsel()+"','"+nieuweCursist.getSureName()+"','"+nieuweCursist.getPhoneNumber()+"','"+nieuweCursist.getCountryOfOrigin()+"','"+nieuweCursist.getPlaceOfLiving()+"')";                                          
         int result = dbConnector.executeDML(strQuery);
         
@@ -148,4 +154,6 @@ public class CursistToevoegenView extends GridPane {
     
     
         }
+
 }
+

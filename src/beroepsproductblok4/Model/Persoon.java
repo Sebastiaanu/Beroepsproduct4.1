@@ -17,6 +17,15 @@ public class Persoon {
     String phoneNumber;
     String placeOfLiving;
 
+    public String getPlaceOfLiving() {
+        return placeOfLiving;
+    }
+
+    public void setPlaceOfLiving(String placeOfLiving) {
+        this.placeOfLiving = placeOfLiving;
+    }
+
+
     public String getEmail() {
         return email;
     }
