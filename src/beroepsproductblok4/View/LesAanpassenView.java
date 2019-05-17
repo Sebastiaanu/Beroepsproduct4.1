@@ -7,7 +7,6 @@ package beroepsproductblok4.View;
 
 import beroepsproductblok4.Connector.DbConnector;
 import beroepsproductblok4.Model.Cursist;
-import beroepsproductblok4.Model.Persoon;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
