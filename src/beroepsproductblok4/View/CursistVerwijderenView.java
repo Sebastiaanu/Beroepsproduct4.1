@@ -6,6 +6,7 @@
 package beroepsproductblok4.View;
 
 import beroepsproductblok4.Connector.DbConnector;
+import beroepsproductblok4.Model.Cursist;
 import java.sql.ResultSet;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -61,6 +62,7 @@ public class CursistVerwijderenView extends GridPane {
 
     private void vuldeCursistCombo() {
     ResultSet result = null;
+    Cursist cursist = new Cursist();
         try{
             String strSQL ="SELECT * FROM Cursist";
             result = dbConnector.getData(strSQL);
@@ -69,10 +71,11 @@ public class CursistVerwijderenView extends GridPane {
                 String cursistAchternaam = result.getString("Achternaam"); 
                 String cursistTussenVoegsel = result.getString("Tussenvoegsel");
                 String cursistEmail = result.getString("Email");
+                
                 if(cursistTussenVoegsel == null){
-                  cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam + " , "+cursistEmail ); 
+                  cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam); 
                 }else{
-                    cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam + " , "+cursistTussenVoegsel+ "  " + cursistEmail );
+                    cBSelectCursist.getItems().add(cursistVoornaam +" "+ cursistAchternaam + " , "+ cursistTussenVoegsel);
                 }
                 
             }
@@ -83,22 +86,28 @@ public class CursistVerwijderenView extends GridPane {
 
     private void verwijderCursist() {
         try{
+            Cursist cursist = new Cursist();
             String cbContent = (cBSelectCursist.getValue().toString());
             String[] splitted = cbContent.split(" ");
+            
+            cursist.setFirstName(splitted[0]);
+            cursist.setTussenvoegsel(splitted[3]);
+            cursist.setSureName(splitted[1]);
+            
                 System.out.println(splitted[0]);
                 System.out.println(splitted[1]);
                 System.out.println(splitted[2]);
                 System.out.println(splitted[3]);
-                System.out.println(splitted[4]);
                 
                 
-//            if(splitted[5]==null){
-//            String strSQL = "DELETE FROM Cursist WHERE Email = ('"+splitted[5]+"')";
-//            int result = dbConnector.executeDML(strSQL);
-//            }else{
-//               String strSQL = "DELETE FROM Cursist WHERE Email = ('"+splitted[5]+"')";
-//            int result = dbConnector.executeDML(strSQL); 
-//            }
+                
+            if(splitted[3]== "2"){
+            String strSQL = "DELETE FROM Cursist WHERE Email = ('"+splitted[5]+"')";
+            int result = dbConnector.executeDML(strSQL);
+            }else{
+               String strSQL = "DELETE FROM Cursist WHERE Email = ('"+splitted[5]+"')";
+            int result = dbConnector.executeDML(strSQL); 
+            }
 //            
         }catch(Exception e){
             System.out.println(e.getMessage());
