@@ -21,7 +21,7 @@ import javafx.scene.text.Text;
 
 /**
  *
- * @author jelmu
+ * @author Sebastiaanu
  */
 public class LesAanpassenView extends GridPane {
 
@@ -114,6 +114,8 @@ public class LesAanpassenView extends GridPane {
                 plaatsOpslag.add(buurthuisPlaats);
             }
         } catch (Exception e) {
+            String eMessage = e.toString();
+            AlertBox.display("Error", eMessage);
             System.out.println(e);
         }
     }
@@ -142,11 +144,15 @@ public class LesAanpassenView extends GridPane {
                 lesOpslag.add(lesId + " " + dag + " " + uur + " " + vrijwilliger);
             }
         } catch (Exception e) {
+            String eMessage = e.toString();
+            AlertBox.display("Error", eMessage);
             System.out.println(e);
         }
     }
 
     public void fillCursistData() {
+        cursOpslag.clear();
+        cursStringOpslag.clear();
         Cursist nCurs;
         ResultSet result = null;
         Integer plek = buurtBox.getSelectionModel().getSelectedIndex();
@@ -167,6 +173,8 @@ public class LesAanpassenView extends GridPane {
                 cursOpslag.add(nCurs);
             }
         } catch (Exception e) {
+            String eMessage = e.toString();
+            AlertBox.display("Error", eMessage);
             System.out.println(e);
         }
     }
@@ -207,7 +215,7 @@ public class LesAanpassenView extends GridPane {
 
         try {
             for (int i = 0; i < newCursOpslag.size(); i++) {
-                String strQuery = "insert into les_cursist values (" + lesId + "," + newCursOpslag.get(i).getIdCursist() + ")";
+                String strQuery = "insert into les_cursist values (seq_lesCursist.nextval,'" + lesId + "','" + newCursOpslag.get(i).getIdCursist() + "')";
                 int result = dbConnector.executeDML(strQuery);
 
                 if (result == 1) {
@@ -216,6 +224,8 @@ public class LesAanpassenView extends GridPane {
 
             }
         } catch (Exception e) {
+            String eMessage = e.toString();
+            AlertBox.display("Error", eMessage);
             System.out.println(e);
         }
     }
