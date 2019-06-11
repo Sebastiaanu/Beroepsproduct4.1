@@ -37,11 +37,11 @@ public class LesToevoegenView extends GridPane {
     DbConnector dbConnector = new DbConnector();
 
     public LesToevoegenView(Pane p) {
-        buurtText = new Text("Buurthuis: ");
-        vrijwText = new Text("Vrijwilliger: ");
-        weekText = new Text("Week: ");
-        dagText = new Text("Dag: ");
-        uurText = new Text("Uur: ");
+        buurtText = new Text("Buurthuis*: ");
+        vrijwText = new Text("Vrijwilliger*: ");
+        weekText = new Text("Week*: ");
+        dagText = new Text("Dag*: ");
+        uurText = new Text("Uur*: ");
 
         uur1 = new RadioButton("14:00");
         uur2 = new RadioButton("15:00");
@@ -52,6 +52,7 @@ public class LesToevoegenView extends GridPane {
         uur7 = new RadioButton("20:00");
 
         send = new Button("Les aanmaken");
+
         send.setOnAction(e -> sendGegevens());
 
         fillLijst();
@@ -136,11 +137,13 @@ public class LesToevoegenView extends GridPane {
     }
 
     public void sendGegevens() {
+
         int weekN = Integer.parseInt(week.getValue().toString());
         int dagN = dag.getSelectionModel().getSelectedIndex() + 1;
         int telnrIndex = buurthuis.getSelectionModel().getSelectedIndex();
         String vrijEmail = vrijwilliger.getValue().toString();
         ArrayList<Integer> lesuren = getLesuren();
+
         try {
             for (int i = 0; i < lesuren.size(); i++) {
                 String strQuery = "insert into Les (IDLES, WEEK, DAG, UUR, BUURTHUIS_TELNR, VRIJWILLIGER_EMAIL) values (seq_les.nextval,'" + weekN + "','" + dagN + "','" + lesuren.get(i) + "','" + telnrOpslag.get(telnrIndex) + "','" + vrijEmail + "')";
@@ -153,6 +156,7 @@ public class LesToevoegenView extends GridPane {
             }
         } catch (Exception e) {
             System.out.println(e);
+
         }
 
     }

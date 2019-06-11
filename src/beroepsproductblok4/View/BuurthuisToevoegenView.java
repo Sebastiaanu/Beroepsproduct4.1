@@ -38,16 +38,17 @@ public class BuurthuisToevoegenView extends GridPane{
     private TextField txtPhonenr;
     
     private Button addBuurthuis;
+   
     
     public BuurthuisToevoegenView(Pane p) {
         lblBuurthuisToevoegen = new Text("Buurthuis toevoegen");
         lblBuurthuisToevoegen.setFont(Font.font("Verdana",20));
-        lblName = new Text("Naam buurthuis toevoegen: ");
-        lblAdres = new Text("Adres buurthuis toevoegen: ");
-        lblPostalCode = new Text("Postcode buurthuis toevoegen: ");
-        lblCity = new Text("Stad/dorp buurthuis toevoegen: ");
+        lblName = new Text("Naam buurthuis toevoegen*: ");
+        lblAdres = new Text("Adres buurthuis toevoegen*: ");
+        lblPostalCode = new Text("Postcode buurthuis toevoegen*: ");
+        lblCity = new Text("Stad/dorp buurthuis toevoegen*: ");
         lblContactPerson = new Text("Contactpersoon buurthuis toevoegen: ");
-        lblPhonenr = new Text("Telefoonnummer buurthuis toevoegen: ");
+        lblPhonenr = new Text("Telefoonnummer buurthuis toevoegen*: ");
         lblDatabaseError = new Text("Fout in database");
         lblDatabaseError.setVisible(false);
         
@@ -99,6 +100,7 @@ public class BuurthuisToevoegenView extends GridPane{
             Buurthuis nieuwBuurthuis = new Buurthuis();
             DbConnector dbConnector = new DbConnector();
             
+           
             nieuwBuurthuis.setName(txtName.getText());
             nieuwBuurthuis.setAdres(txtAdres.getText());
             nieuwBuurthuis.setPostalCode(txtPostalCode.getText());

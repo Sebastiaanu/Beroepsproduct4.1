@@ -36,33 +36,42 @@ public class LesAanpassenView extends GridPane {
     private DbConnector dbConnector = new DbConnector();
 
     public LesAanpassenView(Pane p) {
+        // Declareren ArrayListen
         telnrOpslag = new ArrayList();
         plaatsOpslag = new ArrayList();
         cursOpslag = new ArrayList();
         newCursOpslag = new ArrayList();
 
+        // Declareren observableList
         lesOpslag = FXCollections.observableArrayList();
         weekOpslag = FXCollections.observableArrayList();
         buurtOpslag = FXCollections.observableArrayList();
         cursStringOpslag = FXCollections.observableArrayList();
         newCursStringOpslag = FXCollections.observableArrayList();
 
+        //vult alle lijsten
         fillLijst();
+        
+        //comboboxen vullen en declareren
         weekBox = new ComboBox(weekOpslag);
         buurtBox = new ComboBox(buurtOpslag);
         lesLijst = new ComboBox<>(lesOpslag);
 
+        // lijst cursisten vullen
         cursistLijst = new ListView(cursStringOpslag);
         cursistLijst.setOnMouseClicked(e -> {
             moveCursist();
         });
 
+        //declareren lisview
         newCurslijst = new ListView(newCursStringOpslag);
 
+        //declareren labels
         buurtTxt = new Text("Buurthuis: ");
         weekTxt = new Text("Week: ");
         lesTxt = new Text("Les (ID, Dag, uur, docent)");
 
+        //declareren buttons
         zoekLes = new Button("Zoek Lessen");
         zoekLes.setOnAction(e -> {
             getLessen();
@@ -76,6 +85,7 @@ public class LesAanpassenView extends GridPane {
             sendGegevens();
         });
 
+        //alles toevoegen aan de pane
         add(buurtTxt, 0, 0);
         add(buurtBox, 1, 0);
 
