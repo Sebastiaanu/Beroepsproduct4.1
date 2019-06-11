@@ -24,7 +24,7 @@ public class DbConnector {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
-            String strConnString = "jdbc:oracle:thin:@145.49.68.237:1521:XE";
+            String strConnString = "jdbc:oracle:thin:@145.49.75.86:1521:XE";
             conn = DriverManager.getConnection(strConnString, "DATABASE4", "Muis1993");
         } catch (Exception e) {
             String eMessage = e.toString();
